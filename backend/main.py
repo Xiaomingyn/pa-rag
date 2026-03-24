@@ -3,8 +3,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from dotenv import load_dotenv
-from rag import query_rag
-from ingest import app as ingest_app
+from .rag import query_rag
+from .ingest import app as ingest_app
 
 load_dotenv()
 

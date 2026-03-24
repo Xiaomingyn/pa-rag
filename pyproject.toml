@@ -6,8 +6,6 @@ dependencies = [
     "langchain-community",
     "langchain-openai",
     "langchain-huggingface",
-    # Remove old libraries
-    "qdrant-client",
     "unstructured[all-docs]",
     # Replace them with these:
     "langchain-qdrant",

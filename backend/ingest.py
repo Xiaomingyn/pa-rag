@@ -1,5 +1,5 @@
 from fastapi import FastAPI, BackgroundTasks
-from rag import ingest_documents
+from .rag import ingest_documents
 import os
 
 app = FastAPI()
