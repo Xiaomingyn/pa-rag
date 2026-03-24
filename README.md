@@ -52,7 +52,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 source ~/.cargo/env
 
 # Create .env
-cp .env.example .env
+cp env.example .env
 # Edit: DEEPSEEK_API_KEY=sk-your-key
 ```
 
