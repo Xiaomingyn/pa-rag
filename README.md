@@ -18,7 +18,8 @@ Perfect for financial reports, research papers, contracts, notes.
 ## 🛠️ Tech Stack & Architecture
 
 Documents (PDF/Word/Excel) 
-    ↓ Ingest (Unstructured + LangChain)
+    ↓ 
+Ingest (Unstructured + LangChain)
 Semantic Chunks 
     ↓ Embed (all-MiniLM-L6-v2)
 Vectors → Qdrant (Docker, persistent)
@@ -53,8 +54,10 @@ source ~/.cargo/env
 # Create .env
 cp .env.example .env
 # Edit: DEEPSEEK_API_KEY=sk-your-key
+```
 
 ### **2. Install & Index**
+```bash
 uv sync  # Install deps (30s)
 docker-compose up -d qdrant  # Vector DB
 
@@ -65,14 +68,16 @@ cp /path/to/your/*.pdf data/
 
 # Index (one-time)
 uv run python backend/ingest.py  # ✅ Indexed in chunks
+```
 
 ### **3. Run Services**
+```bash
 # Terminal 1: API
 uv run uvicorn backend.main:app --reload --port 8000
 
 # Terminal 2: UI
 uv run streamlit run frontend/app.py --server.port 8501 --server.address 0.0.0.0
-
+```
 
 ### **4. Chat with your PA!**
 - Open: http://localhost:8501
@@ -80,10 +85,11 @@ uv run streamlit run frontend/app.py --server.port 8501 --server.address 0.0.0.0
 - Ask: "Summarize my tax documents" → Answer + sources
 
 ## API Test:
-
+```bash
 curl -X POST http://localhost:8000/query \
   -H "Content-Type: application/json" \
   -d '{"question": "test"}'
+  ```
 
 ## 🔮 Production Extensions
 Phase 1: Enhanced Features
@@ -93,12 +99,13 @@ Phase 1: Enhanced Features
 - Multi-modal (images, tables via LlamaParse)
 - Auth (OAuth/JWT)
 
-Code:
+```python
 # File watcher
 import watchfiles
 def reindex_on_change():
     for changes in watchfiles.watch("./data"):
         uv run python backend/ingest.py --incremental
+```        
 
 Phase 2: Scale & Reliability
 
@@ -116,7 +123,7 @@ Phase 3: Advanced RAG
 - Multi-LLM routing (OpenAI fallback)
 
 Production Deploy:
-
+```bash
 # Docker Compose + Traefik
 services:
   rag-app:
@@ -125,6 +132,7 @@ services:
     volumes: [qdrant_data]
   redis: latest
   celery: worker
+```
 Cost: ~$0.01/query (DeepSeek + minimal infra)
 
 ## 📈 Performance Metrics
