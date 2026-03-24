@@ -1,0 +1,24 @@
+[project]
+name = "pa-rag"
+version = "0.1.0"
+dependencies = [
+    "langchain>=0.3.0",
+    "langchain-community",
+    "langchain-openai",
+    "langchain-huggingface",
+    # Remove old libraries
+    "qdrant-client",
+    "unstructured[all-docs]",
+    # Replace them with these:
+    "langchain-qdrant",
+    "langchain-unstructured[all-docs]",
+    "fastapi",
+    "uvicorn[standard]",
+    "python-multipart",
+    "sentence-transformers",
+    "python-dotenv",
+    "streamlit",
+    "requests",
+]
+
+
